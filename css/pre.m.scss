@@ -1,0 +1,237 @@
+@import "/mic_touch/css/_base";
+@import './module/_search'; // search bar
+@import './module/_footer'; // video show
+@import './module/_toTop'; // to Top
+@import './module/_warm_up_header'; // to Top
+.m-to-register {
+    height: rem(126);
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    justify-content: center;
+    align-items: center;
+    z-index: 101;
+    box-sizing: border-box;
+    .m-register-container {
+        width: 50%;
+        .m-to-register-message {
+            margin-left: rem(36);
+            font-size: rem(36);
+            line-height: rem(45);
+            color: #222222;
+        }
+        .m-to-register-button {
+            text-align: center;
+            height: rem(75);
+            line-height: rem(75);
+            margin-right: rem(40);
+            background-color: #E64545;
+            font-size: rem(30);
+            font-weight: bold;
+            color: #ffffff;
+            border-radius: rem(38);
+        }
+    }
+}
+
+.not-display {
+    display: none;
+}
+
+.m-common-container {
+    padding: 0 rem(50);
+}
+
+.m-module-title-container {
+    text-align: center;
+    margin-bottom: rem(80);
+    .m-module-title {
+        display: inline-block;
+        font-size: rem(48);
+        font-family: Roboto;
+        font-weight: bold;
+        color: #222222;
+        line-height: rem(72);
+    }
+}
+
+.m-experience-wrap {
+    background-color: #492E9B;
+    padding-bottom: rem(80);
+    .m-module-title-container {
+        margin-bottom: rem(80);
+        .m-module-title {
+            color: #FFFFFF;
+        }
+    }
+    .m-experience-row {
+        text-align: center;
+        margin: rem(80);
+        .m-content-img {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            width: rem(520);
+            height: rem(315);
+            img {
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+        .m-content-message {
+            font-family: Roboto;
+            .m-title-container {
+                margin: rem(10) 0;
+                .m-experience-message-title {
+                    color: #F6EB4F;
+                    font-weight: bold;
+                    font-size: rem(36);
+                    line-height: rem(56);
+                }
+            }
+            .m-detail-container {
+                margin-bottom: rem(20);
+                .m-experience-message-detail {
+                    font-weight: normal;
+                    font-size: rem(24);
+                    line-height: rem(35);
+                    color: #FFFFFF;
+                }
+            }
+            .m-view-more {
+                font-size: rem(36);
+                color: #F6EB4F;
+                i {
+                    font-size: rem(36);
+                }
+                // 移动端不需要hover样式
+                //&:hover {
+                //  cursor: pointer;
+                //}
+            }
+        }
+    }
+}
+
+.m-step-wrap {
+    margin-top: rem(80);
+    .m-module-title-container {
+        margin-bottom: rem(60);
+    }
+    .m-step-detail-container {
+        margin-left: rem(60);
+        .m-step-detail {
+            height: rem(140);
+            display: flex;
+            .m-step-left {
+                width: rem(70);
+                .m-step-icon-container {
+                    width: rem(70);
+                    height: rem(70);
+                    box-sizing: border-box;
+                    border-radius: 50%;
+                    border: 1px solid #DAE0E6;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    i {
+                        color: #222222;
+                        font-size: rem(32);
+                        margin-right: 0;
+                    }
+                }
+                .m-step-line {
+                    height: rem(70);
+                    line-height: rem(70);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    .m-middle-line {
+                        height: rem(47);
+                        box-sizing: border-box;
+                        border-right: 1px solid #DAE0E6;
+                    }
+                }
+            }
+            .m-step-right {
+                flex: 1;
+                padding-left: rem(20);
+                font-family: Roboto;
+                .m-step-name {
+                    font-size: rem(36);
+                    font-weight: bold;
+                    color: #222222;
+                    line-height: rem(70);
+                    span {
+                        color: #FF5B4C;
+                    }
+                }
+                .m-step-desp {
+                    height: rem(70);
+                    overflow: hidden;
+                    font-size: rem(24);
+                    color: #555555;
+                    word-wrap: break-word;
+                }
+            }
+        }
+    }
+}
+
+.m-hot-items-wrap {
+    margin-top: rem(80);
+    .m-module-title-container {
+        margin-bottom: rem(50);
+    }
+    .m-hot-items-container {
+        display: flex;
+        flex-wrap: wrap;
+        .m-hot-item {
+            margin-bottom: rem(20);
+            width: 50%;
+            box-sizing: border-box;
+            .m-hot-img {
+                width: 100%;
+                height: 0;
+                padding-bottom: 100%;
+                img {
+                    width: 100%;
+                    //height: 100%;
+                }
+            }
+            &:nth-child(2n+1) {
+                padding-right: rem(14);
+            }
+            &:nth-child(2n+2) {
+                padding-left: rem(14);
+            }
+            .m-hot-item-desp {
+                color: #555555;
+                display: block;
+                height: rem(24);
+                line-height: rem(24);
+                font-family: Roboto;
+                font-size: rem(24);
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+}
+
+.m-footer {
+    border-top: unset;
+}
+
+.m-search-container {
+    margin-top: rem(14);
+    .m-search {
+        background: unset;
+    }
+}
