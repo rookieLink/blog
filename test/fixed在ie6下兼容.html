@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ie6下兼容fixed</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+        
+        html {
+            overflow: hidden;
+        }
+        
+        body {
+            overflow: scroll;
+        }
+        
+        .fixed_div {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            height: 100px;
+            width: 100px;
+            background-color: pink;
+        }
+        
+        .content_div {
+            height: 2000px;
+            background-color: deeppink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content_div">
+        <div class="fixed_div"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试map标签</title>
+</head>
+
+<body>
+
+
+    111
+    <img usemap="#test-map" src="./聚合页.png" />
+    <map name="test-map">
+        <area href="javascript:void 0;" class="bigG" shape="poly" coords="235,35,725,35,725,52,57,221,57,200" title="这里是大G">
+    </map>
+</body>
+<script type="text/javascript" charset="utf-8">
+    function testClick(value) {
+        console.log(value);
+    }
+
+    function testMouseOver(value) {
+        console.log(value)
+    }
+    var bigGEle = document.getElementsByClassName('bigG')[0];
+    bigGEle.addEventListener('click', function() {
+        console.log('绑定监听事件');
+    });
+</script>
+
+</html>
