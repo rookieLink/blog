@@ -1,0 +1,347 @@
+<%@ include file="/WEB-INF/jsp/common/taglibs.jsp" %>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="keywords" content="Online Expo, Online Exhibition, Smart Expo, Made-in-China.com">
+        <meta name="description" content="Online Exhibition with a wide range of products in China, from reliable China manufacturers, suppliers, exporters and wholesalers on Made-in-China.com">
+        <title>Participate in Online Smart Expo with better experience | Made-in-China.com</title>
+        <mstatic:link rel="stylesheet" href="/css/expo/venue/www/warm-up.css"></mstatic:link>
+        <style>
+            .banner-wrap {
+                <%--background-image: url('${expoVenuePicInfo.venueWarmUpPcBigBanner}');
+                --%>
+            }
+            
+            @media screen and (max-width: 1440px) {
+                .banner-wrap {
+                    <%--background-image: url('${expoVenuePicInfo.venueWarmUpPcSmallBanner}');
+                    --%>
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <%@include file="/WEB-INF/jsp/expo/venue/www/module/header.jsp" %>
+
+            <div class="to-register not-display J-register-wrap">
+                <div class="to-register-message">Click to Register for Expo Attendance</div>
+                <div class="to-register-button J-register-button">Register Now</div>
+            </div>
+
+            <div class="banner-cnt">
+                <%--    style="background-color:${venueInfo.backgroundColor};"--%>
+                    <div class="banner-wrap-bg J-banner-left"></div>
+                    <div class="common-centent banner-wrap J-banner-wrap" style="color:${venueInfo.textThemeColor};">
+                        <div class="banner-wrap-bg J-banner-right"></div>
+                        <div class="content-wrap">
+                            <div class="content-l">
+                                <div class="expo-date">${activityTimeRange}</div>
+                                <div class="expo-desc">Including the following categories</div>
+                                <%--                <ul class="expo-list--%>
+                                    <%--                <c:if test="${expoInfoList.size() > 6}">three</c:if>--%>
+                                        <%--                <c:if test="${expoInfoList.size() <= 6}">two</c:if>--%>
+                                            <%--                 cf">--%>
+                                                <%--                    <c:forEach items="${expoInfoList}" var="expoInfo">--%>
+                                                    <%--                        <li class="list-item">--%>
+                                                        <%--                            <a class="item-inner" style="border:1px solid ${venueInfo.textThemeColor}" href="/expo/venue/info/${venueInfo.venueId}/${expoInfo.encodedExpoId}" target="_blank">--%>
+                                                            <%--                                <div class="text">--%>
+                                                                <%--                                        ${expoInfo.expoName}--%>
+                                                                    <%--                                </div>--%>
+                                                                        <%--                                <i class="ob-icon icon-right" style="color:${venueInfo.textThemeColor}"></i>--%>
+                                                                            <%--                            </a>--%>
+                                                                                <%--                        </li>--%>
+                                                                                    <%--                    </c:forEach>--%>
+                                                                                        <%--                </ul>--%>
+                            </div>
+                            <div class="content-r">
+                                <div class="form-box">
+                                    <div class="form-title">
+                                        Register for Attendance
+                                    </div>
+                                    <input type="hidden" id="expoId" value="${venueInfo.venueId}" />
+                                    <form class="form-cont obelisk-form J-regisForm">
+                                        <input type="hidden" name="countryCode" value="${venueInfo.venueId}" /> ${mt:token(pageContext.request)}
+                                        <div class="form-item">
+                                            <input type="text" name="buyerName" placeholder="Enter your Full Name" class="input-text" autocomplete="off" />
+                                        </div>
+                                        <div class="form-item">
+                                            <input type="text" name="buyerEmail" placeholder="Enter your Email Address" class="input-text" autocomplete="off" />
+                                            <div class="err-block J-dup-mail"></div>
+                                        </div>
+                                        <div class="form-item">
+                                            <input type="text" name="companyName" placeholder="Enter your Company Name" class="input-text" autocomplete="off" />
+                                        </div>
+                                        <div class="form-item">
+                                            <div class="area-code-wrap">
+                                                <select name="areaCode" class="area-code">
+                                        <option value="+86" selected>+86</option>
+                                        <option value="+404">+404</option>
+                                        <option value="+500">+500</option>
+                                    </select>
+                                            </div>
+
+                                            <input type="text" name="mobileNum" placeholder="Enter your Mobile Phone Number(Optional)" class="input-text mobile-num" autocomplete="off" />
+                                            <div class="err-block J-dup-phone"></div>
+                                        </div>
+                                        <div class="form-item">
+                                            <input type="text" name="productKeywords" placeholder="Sourcing Product(s)" class="input-text" autocomplete="off" />
+                                        </div>
+                                        <div class="form-item">
+                                            <div class="form-item-wrap">
+                                                <div class="form-item-l">
+                                                    <input type="text" name="purchaseQuantity" placeholder="Estimated Quantity" class="input-text input-quantity" autocomplete="off" />
+                                                </div>
+                                                <div class="form-item-r">
+                                                    <select name="unit">
+                                            <c:forEach items="${unitList}" var="unit">
+                                                <option value="${unit.getValue()}" <c:if
+                                                        test="${unit.getValue() eq 4}"> selected="selected"</c:if> >
+                                                        ${unit.getContent()}
+                                                </option>
+                                            </c:forEach>
+                                        </select>
+                                                </div>
+                                            </div>
+                                            <div class="err-block" wrapfor="purchaseQuantity"></div>
+                                        </div>
+                                        <div class="btn-submit J-submit">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 322 50" style="enable-background:new 0 0 322 50;fill: ${venueInfo.textThemeColor}" xml:space="preserve">
+                        <g>
+                            <path class="st0" d="M157.89,23.82c-0.94,0-1.59,0.39-1.95,1.16v4.38c0.36,0.78,1.02,1.17,1.97,1.17c0.96,0,1.59-0.47,1.89-1.42
+		c0.14-0.45,0.21-1.14,0.21-2.06c0-1.12-0.18-1.94-0.53-2.46C159.13,24.07,158.6,23.82,157.89,23.82z"/>
+                            <path class="st0" d="M297-0.07H25c-13.81,0-25,11.19-25,25v0c0,13.81,11.19,25,25,25h272c13.81,0,25-11.19,25-25v0
+		C322,11.13,310.81-0.07,297-0.07z M132.16,22.97c0.49,0.33,1.21,0.64,2.16,0.92c1.75,0.53,3.02,1.18,3.82,1.96
+		c0.8,0.78,1.2,1.75,1.2,2.91c0,1.29-0.49,2.3-1.47,3.04c-0.98,0.74-2.29,1.1-3.95,1.1c-1.15,0-2.19-0.21-3.14-0.63
+		s-1.66-1-2.16-1.73c-0.5-0.73-0.74-1.58-0.74-2.54h3.09c0,1.65,0.98,2.47,2.95,2.47c0.73,0,1.3-0.15,1.71-0.45s0.62-0.71,0.62-1.25
+		c0-0.58-0.21-1.03-0.62-1.34c-0.41-0.31-1.15-0.64-2.21-0.98c-1.07-0.34-1.91-0.69-2.53-1.02c-1.7-0.92-2.54-2.15-2.54-3.7
+		c0-0.81,0.23-1.53,0.68-2.16c0.45-0.63,1.11-1.13,1.96-1.48c0.85-0.36,1.81-0.53,2.87-0.53c1.07,0,2.02,0.19,2.85,0.58
+		c0.83,0.39,1.48,0.93,1.94,1.64c0.46,0.7,0.69,1.5,0.69,2.4h-3.08c0-0.68-0.22-1.21-0.65-1.59c-0.43-0.38-1.04-0.57-1.81-0.57
+		c-0.75,0-1.34,0.16-1.75,0.48c-0.42,0.32-0.63,0.74-0.63,1.26C131.43,22.24,131.67,22.65,132.16,22.97z M150.75,32.71h-2.79
+		l-0.08-1.13c-0.73,0.89-1.74,1.33-3.04,1.33c-1.19,0-2.1-0.34-2.72-1.03c-0.63-0.68-0.95-1.69-0.96-3v-7.27h2.96v7.18
+		c0,1.16,0.53,1.74,1.58,1.74c1,0,1.69-0.35,2.07-1.05v-7.86h2.97V32.71z M162.98,27.26c0,1.78-0.38,3.16-1.14,4.16
+		c-0.76,0.99-1.82,1.49-3.18,1.49c-1.2,0-2.16-0.46-2.88-1.38l-0.13,1.18h-2.67V16.96h2.96v5.65c0.68-0.8,1.58-1.2,2.7-1.2
+		c1.35,0,2.41,0.5,3.18,1.49c0.77,0.99,1.15,2.39,1.15,4.2V27.26z M180.71,32.71h-2.97v-7.08c0-0.63-0.12-1.09-0.37-1.38
+		s-0.68-0.44-1.3-0.44c-0.89,0-1.5,0.42-1.85,1.27l0.01,7.62h-2.96v-7.07c0-0.64-0.13-1.11-0.38-1.39s-0.68-0.43-1.29-0.43
+		c-0.84,0-1.45,0.35-1.83,1.05v7.84h-2.96v-11.1h2.78l0.09,1.24c0.79-0.96,1.85-1.45,3.19-1.45c1.43,0,2.41,0.56,2.94,1.69
+		c0.78-1.13,1.89-1.69,3.33-1.69c1.2,0,2.1,0.35,2.69,1.05c0.59,0.7,0.88,1.76,0.88,3.16V32.71z M186.11,32.71h-2.97v-11.1h2.97
+		V32.71z M185.83,19.85c-0.3,0.29-0.71,0.43-1.2,0.43c-0.5,0-0.9-0.14-1.21-0.43c-0.3-0.29-0.46-0.66-0.46-1.11
+		c0-0.44,0.15-0.81,0.45-1.1c0.3-0.29,0.7-0.43,1.22-0.43c0.5,0,0.91,0.14,1.21,0.43s0.45,0.65,0.45,1.1
+		C186.29,19.19,186.13,19.56,185.83,19.85z M194.11,32.64c-0.58,0.18-1.18,0.27-1.79,0.27c-2.08,0-3.14-1.05-3.18-3.15v-5.98h-1.62
+		v-2.17h1.62v-2.73h2.96v2.73h1.9v2.17h-1.9v5.54c0,0.41,0.08,0.71,0.24,0.88s0.46,0.27,0.9,0.27c0.33,0,0.62-0.02,0.87-0.07V32.64z
+		"/>
+                        </g>
+                    </svg>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="num-bar">
+                            <input type="hidden" id="time" value="${remainingTime}" />
+                            <div class="num-item">
+                                <div class="title">Exhibitors</div>
+                                <%--<div class="num"><fmt:formatNumber value="${venueInfo.applyComCount}" pattern="#,#00"/><i class="ob-icon icon-add"></i></div>--%>
+                                    <div class="num"><span class="rollNum-wrap J-rollNum" data-number="${venueInfo.applyComCount}">${venueInfo.applyComCount}</span><i class="ob-icon icon-add"></i></div>
+                            </div>
+                            <div class="num-item">
+                                <div class="title">Products</div>
+                                <%--<div class="num"><fmt:formatNumber value="${venueInfo.applyProdCount}" pattern="#,#00"/><i class="ob-icon icon-add"></i></div>--%>
+                                    <div class="num"><span class="rollNum-wrap J-rollNum" data-number="${venueInfo.applyProdCount}">${venueInfo.applyProdCount}</span><i class="ob-icon icon-add"></i></div>
+                            </div>
+                            <div class="num-item">
+                                <div class="title"><i class="ob-icon icon-clock"></i>Count Down</div>
+                                <div class="remain-time">
+                                    <span class="date-value remain-day"></span>
+                                    <span class="date-flag">D&nbsp;</span>
+                                    <span class="date-value remain-hour"></span>
+                                    <span class="date-flag">H&nbsp;</span>
+                                    <span class="date-value remain-minute"></span>
+                                    <span class="date-flag">M</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="common-centent experience-wrap">
+                <%--     style="color: ${venueInfo.textThemeColor}; background-color: ${venueInfo.backgroundColor}">--%>
+                    <div class="content-width">
+                        <div class="module-title-container">
+                            <div class="module-title">
+                                Experience More Than Offline Exhibition
+                            </div>
+                        </div>
+                        <div class="experience-detail">
+                            <div class="common-experience"></div>
+                            <div class="remain-detail">
+                                <div class="detail-area">
+                                    <div class="icon-wrap">
+                                        <i class="micon">&#xe08b;</i>
+                                    </div>
+                                    <div class="desp">
+                                        Exhibitors List <br/>
+                                        <span><a href="" download="">Download Freely <i class="micon">&#xe026;</i></a></span>
+                                    </div>
+                                </div>
+                                <div class="detail-area">
+                                    <div class="icon-wrap">
+                                        <i class="micon">&#xe050;</i>
+                                    </div>
+                                    <div class="desp">
+                                        Loading & Products Inspection Service
+                                    </div>
+                                </div>
+                                <div class="detail-area">
+                                    <div class="icon-wrap">
+                                        <i class="micon">&#xe098;</i>
+                                    </div>
+                                    <div class="desp">
+                                        Coupons (Available for Online Trading)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="common-centent step-wrap">
+                <div class="step-container">
+                    <div class="step-title">
+                        How to Participate?
+                    </div>
+                    <div class="step-detail-container">
+                        <div class="step-detail">
+                            <div class="step-icon-container">
+                                <i class="micon">&#xe02c;</i>
+                            </div>
+                            <div class="step-info">
+                                <div class="step-info-top">
+                                    <div class="step-name">Step <span>1</span></div>
+                                    <div class="step-line"></div>
+                                </div>
+                                <div class="step-info-bottom">
+                                    Register for attendance
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-detail">
+                            <div class="step-icon-container">
+                                <i class="micon">&#xe040;</i>
+                            </div>
+                            <div class="step-info">
+                                <div class="step-info-top">
+                                    <div class="step-name">Step <span>2</span></div>
+                                    <div class="step-line"></div>
+                                </div>
+                                <div class="step-info-bottom">
+                                    Find potential suppliers and reserve online meetings
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-detail">
+                            <div class="step-icon-container">
+                                <i class="micon">&#xe03d;</i>
+                            </div>
+                            <div class="step-info">
+                                <div class="step-info-top">
+                                    <div class="step-name">Step <span>3</span></div>
+                                    <div class="step-line"></div>
+                                </div>
+                                <div class="step-info-bottom">
+                                    Check the Reservation Code from your email
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-detail">
+                            <div class="step-icon-container">
+                                <i class="micon">&#xe05a;</i>
+                            </div>
+                            <div class="step-info">
+                                <div class="step-info-top">
+                                    <div class="step-name">Step <span>4</span></div>
+                                </div>
+                                <div class="step-info-bottom">
+                                    Attend the expo and locate your reservation as scheduled with the code
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="common-centent hot-items-wrap">
+                <div class="module-title-container">
+                    <div class="module-title">
+                        <c:out value="${venueInfo.hotItemName}" />
+                    </div>
+                </div>
+                <div class="hot-items-container">
+                    <c:forEach items="${hotItemList}" var="hotItem">
+                        <a rel="nofollow" target="_blank" href="${hotItem.link}" class="J-hot-item">
+                            <div class="hot-item">
+                                <div class="hot-img">
+                                    <img src="${hotItem.picUrl}" alt="${hotItem.picName}" />
+                                </div>
+                                <div class="hot-item-desp">
+                                    <c:out value="${hotItem.itemName}" />
+                                </div>
+                            </div>
+                        </a>
+                    </c:forEach>
+                </div>
+            </div>
+
+            <div id="footer">
+                <mic:footer uri="footer-5.html" params="${params}"></mic:footer>
+            </div>
+
+            <div id="J-video-container" class="pop360" style="display: none">
+                <div class="p-cover J-cover"></div>
+                <div class="p-view p-video-view J-view">
+                    <div id="J-video-show" class="p-view"></div>
+                </div>
+                <div class="p-close J-close"><i class="ob-icon icon-delete"></i></div>
+            </div>
+            <script type="text/javascript" charset="utf-8">
+                window.venueWebFlag = true;
+            </script>
+
+            <script id="J-DlgTpl" type="text/html">
+                <div class="dlg-wrap">
+                    <div class="title"><i class="micon icon-succ">&#xe000;</i>Registered Successfully</div>
+                    <div class="code-wrap">
+                        Your invitation code is:
+                        <div class="code">{{=code}}</div>
+                    </div>
+                </div>
+            </script>
+
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/libs/jquery.js"></mstatic:script>
+            <mstatic:script type="text/javascript" src="/common/js/assets/template/template.js" charset="utf-8"></mstatic:script>
+            <mstatic:script type="text/javascript" src="/common/js/business/global/util.js" charset="utf-8"></mstatic:script>
+            <mstatic:script type="text/javascript" src="/common/js/assets/select2/select.js" charset="utf-8"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/validation/validator.plus.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/observe/observe.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/player/player.js"></mstatic:script>
+            <!-- 搜索功能引入-->
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/artDialog/2.0.0/artDialog.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/libs/class.0.3.2.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/observe/observe.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/JFixed/JFixed.2.1.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/placeholder/placeholder.1.3.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/maskSelect/maskSelect.1.0.min.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/suggest/inputSuggest.1.1.0.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/assets/picRound/picRound.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/business/searchBar/search.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/common/js/business/plugs/slideNav/slideNav.js"></mstatic:script>
+            <!--引入结束-->
+            <mstatic:script type="text/javascript" charset="utf-8" src="/mic_touch/js/expo/module/playVideo.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/mic_touch/js/expo/venue/www/module/warm-up-video.js"></mstatic:script>
+            <mstatic:script type="text/javascript" charset="utf-8" src="/mic_touch/js/expo/venue/m/lib/lottie.js"></mstatic:script>
+            <mstatic:script type="text/javascript" src="/mic_touch/js/expo/venue/www/warm-up.js" charset="utf-8"></mstatic:script>
+    </body>
+
+    </html>
