@@ -1,0 +1,2 @@
+// import * as $protobuf from "protobufjs/light";
+import $protobuf from "./weichatPb/protobuf"
