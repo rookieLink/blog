@@ -1,0 +1,6 @@
+// import * as $protobuf from "protobufjs/light";
+import $protobuf from "./weichatPb/protobuf"
+
+
+待优化 
+1、海报未做品牌名称长度控制， 当长度超出一定范围时，需要截取显示“...”
