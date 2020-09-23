@@ -5,14 +5,14 @@
 getElementById（主体只能是document，）
 getElementsByTagName
 getElementsByClassName(IE6-8不支持)
-getElementsByName（ie6-8只能用来获取表单的name）
+gtetElementsByName（ie6-8只能用来获取表单的name）
 querySelectorAll（没有dom映射）
 
 
-
+h
 client
 
-clienHeigth    当前元素可视区域的宽高， （内容的宽高+padding）
+clienHeight    当前元素可视区域的宽高， （内容的宽高+padding）
 clientTop   上部分边框
 
 
