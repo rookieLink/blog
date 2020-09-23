@@ -1,4 +1,4 @@
-<%@ include file="/WEB-INF/jsp/common/taglibs.jsp"%>
+<%@ include file="/WEB-INF/jsp/common/taglibs.jsp" %>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -8,173 +8,196 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
         <mstatic:link rel="stylesheet" href="/css/expo/venue/www/warm-up.css"></mstatic:link>
-        <%--    <mstatic:link rel="stylesheet" href="/css/expo/gray/www/2019/expo-home.css" media="all"></mstatic:link>--%>
-
     </head>
 
     <body>
         <%@include file="/WEB-INF/jsp/expo/venue/www/module/header.jsp"%>
 
-            <div class="banner-wrap" style="background-position:center; background-image: url(${expoInfo.bodyBg})">
+            <div class="to-register not-display J-register-wrap">
+                <div class="to-register-message">Click to Register for Expo Attendance</div>
+                <div class="to-register-button J-register-button">Register Now</div>
+            </div>
+
+            <div class="banner-wrap J-banner-wrap" style="background-position:center; background-image: url(${expoInfo.bodyBg})">
                 <div class="content-wrap">
                     <div class="content-r">
                         <div class="form-box">
                             <div class="form-title">
                                 Register for Attendance
                             </div>
+                            <input type="hidden" id="expoId" value="${venueInfo.venueId}" />
                             <form class="form-cont obelisk-form J-regisForm">
                                 <div class="form-item">
-                                    <input type="text" name="name" placeholder="Your Name" class="input-text" maxlength="30" autocomplete="off" />
+                                    <input type="text" name="buyerName" placeholder="Your Name" class="input-text" maxlength="30" autocomplete="off" />
                                 </div>
                                 <div class="form-item">
-                                    <input type="text" name="Email" placeholder="Your Email" class="input-text" autocomplete="off" />
+                                    <input type="text" name="buyerEmail" placeholder="Your Email" class="input-text" autocomplete="off" />
                                 </div>
                                 <div class="form-item">
-                                    <input type="text" name="company" placeholder="Your Company" class="input-text" maxlength="30" autocomplete="off" />
+                                    <input type="text" name="companyName" placeholder="Your Company" class="input-text" maxlength="30" autocomplete="off" />
                                 </div>
                                 <div class="form-item">
-                                    <input type="text" name="keywords" placeholder="Sourcing Product(s)" class="input-text" maxlength="30" autocomplete="off" />
+                                    <input type="text" name="productKeywords" placeholder="Sourcing Product(s)" class="input-text" maxlength="30" autocomplete="off" />
                                 </div>
                                 <div class="form-item form-item-wrap">
                                     <div class="form-item-l">
-                                        <input type="text" name="quantity" placeholder="Purchase Quantity" class="input-text input-quantity" maxlength="20" autocomplete="off" />
+                                        <input type="text" name="purchaseQuantity" placeholder="Purchase Quantity" class="input-text input-quantity" maxlength="20" autocomplete="off" />
                                     </div>
                                     <div class="form-item-r">
                                         <select name="unit">
-                                <option value="Piece(s)">Piece(s)</option>
-                                <option value="222">2222</option>
-                                <option value="333">3333</option>
+                                <option value="20' Container"  id="20' Container">20' Container</option>
+                                <option value="40' Container"  id="40' Container" >40' Container</option>
+                                <option value="40' HQ Container"  id="40' HQ Container" >40' HQ Container</option>
+                                <option value="Piece(s)" id="Pieces" selected>Piece(s)</option>
+                                <option value="Bag(s)"  id="Bags" >Bag(s)</option>
+                                <option value="Box(es)"  id="Boxes" >Box(es)</option>
+                                <option value="Foot(Feet)" id="Foot" >Foot(Feet)</option>
+                                <option value="Meter(s)" id="Meter" >Meter(s)</option>
+                                <option value="Pair(s)"  id="Pairs" >Pair(s)</option>
+                                <option value="Ream(s)" id="Reams" >Ream(s)</option>
+                                <option value="Roll(s)" id="Rolls" >Roll(s)</option>
+                                <option value="Set(s)"  id="Sets" >Set(s)</option>
+                                <option value="Square Meter(s)"  id="SquareMeters" >Square Meter(s)</option>
+                                <option value="Square Foot(Feet)"  id="SquareFeet" >Square Foot(Feet)</option>
+                                <option value="Ton(s)"  id="Tons" >Ton(s)</option>
+                                <option value="Yard(s)"  id="Yard" >Yard(s)</option>
+                                <option value="Other"  id="Other" >Other</option>
                             </select>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-submit">Submit</button>
                             </form>
-                            </divclass>
                         </div>
                     </div>
-                    <input type="hidden" name="deadline" />
+                    <input type="hidden" id="time" value="10" />
+                </div>
+                <div class="remain-time">
+                    <div class="remain-day"></div>
+                    <div class="remain-hour"></div>
+                    <div class="remain-minute"></div>
                 </div>
             </div>
-            <div class="common-centent experience-wrap">
-                <div class="module-title-container">
-                    <div class="module-title">
-                        Experience More Than Offline Exhibition
-                    </div>
-                </div>
+            <div class="common-centent experience-wrap" style="color: #F6EB4F; background-color: #492E9B">
+                <%--<div class="common-centent experience-wrap"--%>
+                    <%--     style="color: ${venueInfo.textThemeColor}; background-color: ${venueInfo.backgroundColor}">--%>
+                        <div class="content-width">
+                            <div class="module-title-container">
+                                <div class="module-title">
+                                    Experience More Than Offline Exhibition
+                                </div>
+                            </div>
 
-                <div class="experience-row">
-                    <div class="experience-wrap-left">
-                        <div class="content-img">
-                            <img src="/mic_touch/img/expo/venue/experience/1.png">
-                        </div>
-                    </div>
-                    <div class="experience-wrap-right">
-                        <div class="content-message">
-                            <div class="title-container">
-                                <div class="experience-message-title" style="color: #F6EB4F">
-                                    Audited Supplier-Get You
+                            <div class="experience-row">
+                                <div class="experience-wrap-left">
+                                    <div class="content-img">
+                                        <img src="${mstatic:murl('/mic_touch/img/expo/venue/experience/1.png')}">
+                                    </div>
                                 </div>
-                                <div class="experience-message-title" style="color: #F6EB4F">
-                                    Reliable Suppliers
-                                </div>
-                            </div>
-                            <div class="detail-container">
-                                <div class="experience-message-detail">
-                                    Audited Reports Online for Free
-                                </div>
-                                <div class="experience-message-detail">
-                                    Abundant Products from 14 Industries
-                                </div>
-                                <div class="experience-message-more J-play-video" style="color:#F6EB4F;">
-                                    <i class="micon">&#xe03f;</i> View More
-                                    <script type="text/data-video">{ "videoUrl": "http://v.youku.com/v_show/id_XMzk5NDI5MDYwMA==.html", "vid": "", "autoplay": true }
-                                    </script>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="experience-row">
-                    <div class="experience-wrap-left">
-                        <div class="content-message">
-                            <div class="title-container">
-                                <div class="experience-message-title" style="color: #F6EB4F">
-                                    Advanced-Technology
-                                </div>
-                                <div class="experience-message-title" style="color: #F6EB4F">
-                                    Experience Bring You Immersive
-                                </div>
-                                <div class="experience-message-title" style="color: #F6EB4F">
-                                    Experience
+                                <div class="experience-wrap-right">
+                                    <div class="content-message">
+                                        <div class="title-container">
+                                            <div class="experience-message-title">
+                                                Audited Supplier-Get You
+                                            </div>
+                                            <div class="experience-message-title">
+                                                Reliable Suppliers
+                                            </div>
+                                        </div>
+                                        <div class="detail-container">
+                                            <div class="experience-message-detail">
+                                                Audited Reports Online for Free
+                                            </div>
+                                            <div class="experience-message-detail">
+                                                Abundant Products from 14 Industries
+                                            </div>
+                                            <div class="experience-message-more J-play-video">
+                                                <i class="micon">&#xe03f;</i> View More
+                                                <script type="text/data-video">{ "videoUrl": "http://v.youku.com/v_show/id_XMzk5NDI5MDYwMA==.html", "vid": "", "autoplay": true }</script>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="detail-container">
-                                <div class="experience-message-detail">
-                                    Live Online Meetings-Face to Face with Suppliers
+                            <div class="experience-row">
+                                <div class="experience-wrap-left">
+                                    <div class="content-message">
+                                        <div class="title-container">
+                                            <div class="experience-message-title">
+                                                Advanced Technology - Bring You
+                                            </div>
+                                            <div class="experience-message-title">
+                                                Immersive Experience
+                                            </div>
+                                        </div>
+                                        <div class="detail-container">
+                                            <div class="experience-message-detail">
+                                                Live Online Meetings-Face to Face with Suppliers
+                                            </div>
+                                            <div class="experience-message-detail">
+                                                Factory Verification with 360° VR
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="experience-message-detail">
-                                    Factory Verification with 360° VR
+                                <div class="experience-wrap-right">
+                                    <div class="content-img">
+                                        <img src="${mstatic:murl('/mic_touch/img/expo/venue/experience/2.png')}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="experience-row">
+                                <div class="experience-wrap-left">
+                                    <div class="content-img">
+                                        <img src="${mstatic:murl('/mic_touch/img/expo/venue/experience/3.png')}">
+                                    </div>
+                                </div>
+                                <div class="experience-wrap-right">
+                                    <div class="content-message">
+                                        <div class="title-container">
+                                            <div class="experience-message-title">
+                                                Satisfied Prices
+                                            </div>
+                                        </div>
+                                        <div class="detail-container">
+                                            <div class="experience-message-detail">
+                                                Coupons from Made-in-China.com
+                                            </div>
+                                            <div class="experience-message-detail">
+                                                Concessional Prices from Suppliers
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="experience-row">
+                                <div class="experience-wrap-left">
+                                    <div class="content-message">
+                                        <div class="title-container">
+                                            <div class="experience-message-title">
+                                                First-Rate Services
+                                            </div>
+                                        </div>
+                                        <div class="detail-container">
+                                            <div class="experience-message-detail">
+                                                Superior Services for Star Buyers
+                                            </div>
+                                            <div class="experience-message-detail">
+                                                A Detailed List of All Exhibitors
+                                            </div>
+                                            <div class="experience-message-detail">
+                                                Loading & Products Inspection Service
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="experience-wrap-right">
+                                    <div class="content-img">
+                                        <img src="${mstatic:murl('/mic_touch/img/expo/venue/experience/4.png')}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="experience-wrap-right">
-                        <div class="content-img">
-                            <img src="/mic_touch/img/expo/venue/experience/2.png">
-                        </div>
-                    </div>
-                </div>
-                <div class="experience-row">
-                    <div class="experience-wrap-left">
-                        <div class="content-img">
-                            <img src="/mic_touch/img/expo/venue/experience/3.png">
-                        </div>
-                    </div>
-                    <div class="experience-wrap-right">
-                        <div class="content-message">
-                            <div class="title-container">
-                                <div class="experience-message-title" style="color: #F6EB4F">
-                                    Satisfied Prices
-                                </div>
-                            </div>
-                            <div class="detail-container">
-                                <div class="experience-message-detail">
-                                    Coupons from Made-in-China.com
-                                </div>
-                                <div class="experience-message-detail">
-                                    Concessional Prices from Suppliers
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="experience-row">
-                    <div class="experience-wrap-left">
-                        <div class="content-message">
-                            <div class="title-container">
-                                <div class="experience-message-title" style="color: #F6EB4F">
-                                    First-Rate Services
-                                </div>
-                            </div>
-                            <div class="detail-container">
-                                <div class="experience-message-detail">
-                                    Superior Services for Star Buyers
-                                </div>
-                                <div class="experience-message-detail">
-                                    Available List of All Exhibitors
-                                </div>
-                                <div class="experience-message-detail">
-                                    Loading & Products Inspection Service
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="experience-wrap-right">
-                        <div class="content-img">
-                            <img src="/mic_touch/img/expo/venue/experience/4.png">
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="common-centent step-wrap">
                 <div class="module-title-container">
@@ -231,48 +254,57 @@
                     <div class="module-title">Hot Items</div>
                 </div>
                 <div class="hot-items-container">
-                    <div class="hot-item">
-                        <div class="hot-img">
-                            <img src="/mic_touch/img/expo/venue/hot_item/item.png" />
-                        </div>
-                        <div class="hot-item-desp">Best Commercial Motorized</div>
-                        <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
-                    </div>
-                    <div class="hot-item">
-                        <div class="hot-img">
-                            <img src="/mic_touch/img/expo/venue/hot_item/item.png" />
-                        </div>
-                        <div class="hot-item-desp">Best Commercial Motorized</div>
-                        <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
-                    </div>
-                    <div class="hot-item">
-                        <div class="hot-img">
-                            <img src="/mic_touch/img/expo/venue/hot_item/item.png" />
-                        </div>
-                        <div class="hot-item-desp">Best Commercial Motorized</div>
-                        <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
-                    </div>
-                    <div class="hot-item">
-                        <div class="hot-img">
-                            <img src="/mic_touch/img/expo/venue/hot_item/item.png" />
-                        </div>
-                        <div class="hot-item-desp">Best Commercial Motorized</div>
-                        <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
-                    </div>
-                    <div class="hot-item">
-                        <div class="hot-img">
-                            <img src="/mic_touch/img/expo/venue/hot_item/item.png" />
-                        </div>
-                        <div class="hot-item-desp">Best Commercial Motorized</div>
-                        <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
-                    </div>
-                    <div class="hot-item">
-                        <div class="hot-img">
-                            <img src="/mic_touch/img/expo/venue/hot_item/item.png" />
-                        </div>
-                        <div class="hot-item-desp">Best Commercial Motorized</div>
-                        <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
-                    </div>
+                    <%--        <c:forEach items="${hotItemList}" var="hotItem">--%>
+                        <%--            <div class="hot-item">--%>
+                            <%--                <div class="hot-img">--%>
+                                <%--                    <img src="${mstatic:murl(hotItem.imageUrl)}"/>--%>
+                                    <%--                </div>--%>
+                                        <%--                <div class="hot-item-desp">${hotItem.itemName}</div>--%>
+                                            <%--                <div class="hot-item-desp">${hotItem.itemDesp}</div>--%>
+                                                <%--            </div>--%>
+                                                    <%--        </c:forEach>--%>
+                                                        <div class="hot-item">
+                                                            <div class="hot-img">
+                                                                <img src="${mstatic:murl('/mic_touch/img/expo/venue/hot_item/item.png')}" />
+                                                            </div>
+                                                            <div class="hot-item-desp">Best Commercial Motorized</div>
+                                                            <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
+                                                        </div>
+                                                        <div class="hot-item">
+                                                            <div class="hot-img">
+                                                                <img src="${mstatic:murl('/mic_touch/img/expo/venue/hot_item/item.png')}" />
+                                                            </div>
+                                                            <div class="hot-item-desp">Best Commercial Motorized</div>
+                                                            <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
+                                                        </div>
+                                                        <div class="hot-item">
+                                                            <div class="hot-img">
+                                                                <img src="${mstatic:murl('/mic_touch/img/expo/venue/hot_item/item.png')}" />
+                                                            </div>
+                                                            <div class="hot-item-desp">Best Commercial Motorized</div>
+                                                            <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
+                                                        </div>
+                                                        <div class="hot-item">
+                                                            <div class="hot-img">
+                                                                <img src="${mstatic:murl('/mic_touch/img/expo/venue/hot_item/item.png')}" />
+                                                            </div>
+                                                            <div class="hot-item-desp">Best Commercial Motorized</div>
+                                                            <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
+                                                        </div>
+                                                        <div class="hot-item">
+                                                            <div class="hot-img">
+                                                                <img src="${mstatic:murl('/mic_touch/img/expo/venue/hot_item/item.png')}" />
+                                                            </div>
+                                                            <div class="hot-item-desp">Best Commercial Motorized</div>
+                                                            <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
+                                                        </div>
+                                                        <div class="hot-item">
+                                                            <div class="hot-img">
+                                                                <img src="${mstatic:murl('/mic_touch/img/expo/venue/hot_item/item.png')}" />
+                                                            </div>
+                                                            <div class="hot-item-desp">Best Commercial Motorized</div>
+                                                            <div class="hot-item-desp"> Treadmill, Professional Treadmill Treadmill Treadmill</div>
+                                                        </div>
                 </div>
             </div>
             <div class="footer-wrap">
