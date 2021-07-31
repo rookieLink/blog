@@ -152,3 +152,175 @@ function TextInputWithFocusButton() {
   );
 }
 ```
+
+## useContext: 定义全局状态
+api:
+```javascript
+const value = useContext(MyContext);
+```
+
+具体使用场景：
+```javascript
+
+const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#eeeeee"
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222"
+  }
+};
+// 创建一个 Theme 的 Context
+
+const ThemeContext = React.createContext(themes.light);
+function App() {
+  // 整个应用使用 ThemeContext.Provider 作为根组件
+  return (
+    // 使用 themes.dark 作为当前 Context 
+    <ThemeContext.Provider value={themes.dark}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+// 在 Toolbar 组件中使用一个会使用 Theme 的 Button
+function Toolbar(props) {
+  return (
+    <div>
+      <ThemedButton />
+    </div>
+  );
+}
+
+// 在 Theme Button 中使用 useContext 来获取当前的主题
+function ThemedButton() {
+  const theme = useContext(ThemeContext);
+  return (
+    <button style={{
+      background: theme.background,
+      color: theme.foreground
+    }}>
+      I am styled by theme context!
+    </button>
+  );
+}
+```
+
+如何动态调整theme呢，可以使用state来保存
+```javascript
+
+// ...
+
+function App() {
+  // 使用 state 来保存 theme 从而可以动态修改
+  const [theme, setTheme] = useState("light");
+
+  // 切换 theme 的回调函数
+  const toggleTheme = useCallback(() => {
+    setTheme((theme) => (theme === "light" ? "dark" : "light"));
+  }, []);
+
+  return (
+    // 使用 theme state 作为当前 Context
+    <ThemeContext.Provider value={themes[theme]}>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+```
+
+
+# 使用Hooks要忘掉组件的生命周期
+react的本质：从Model到view的映射；状态变化会导致渲染，引起状态变化的只有两个：  
+1、用户操作产生的事件，比如点击了某个按钮。  
+2、副作用产生的事件，比如发起有个请求正确返回了。
+
+注： 这两种事件本身并不会导致组件的重新渲染，但我们在这两种事件处理函数中，一定是因为改变了某个状态，这个状态可能是 State 或者 Context，从而导致了 UI 的重新渲染。
+
+对于第一种处理事件和class思维基本一致；对于第二种函数式组件通过useEffect这个Hook更加直观和语义化的方式来进行描述。
+
+在函数组件中思考的方式是：当某个状态变化时，我要做什么，而不是在class组件中的生命周期方法中我要做什么
+
+## class组件和函数式组件的区别
+- class具有构造函数，生成一个类实例这样的概念，函数组件只是函数，没有对象、类实例这种概念
+- 函数组件基本上没有初始化需要，Hooks会自己负责自己的初始化。构造函数其实是在其他代码执行前的一次性初始化工作，但是函数式组件没有生命周期机制，也没有构造函数，怎么实现一次性代码的执行呢？
+  
+  可以使用useRef这个Hook，实现一个一次性执行某段代码的自定义Hook，如下：
+  ```javascript
+    import { useRef } from 'react';
+
+    // 创建一个自定义 Hook 用于执行一次性代码
+    function useSingleton(callback) {
+      // 用一个 called ref 标记 callback 是否执行过
+      const called = useRef(false);
+      // 如果已经执行过，则直接返回
+      if (called.current) return;
+      // 第一次调用时直接执行
+      callBack();
+      // 设置标记为已执行过
+      called.current = true;
+    }
+
+    const MyComp = () => {
+      // 使用自定义 Hook
+      useSingleton(() => {
+        console.log('这段代码只执行一次');
+      });
+
+      return (
+        <div>My Component</div>
+      );
+    };
+  ```
+  备注：关于这里思考一下，为什么不适用useEffect一次性执行代码呢？  
+  因为useEffect是在render完成之后执行，需要在函数体执行之前执行的话，这种方式就行不通了，需要采取上面的这种方式
+
+-  可以通过useEffect做到基本上和componentDidMount，componentWillUnmount 和 componentDidUpdate生命周期等价的
+  ```javascript
+    useEffect(() => {
+      // componentDidMount + componentDidUpdate
+      console.log('这里基本等价于 componentDidMount + componentDidUpdate');
+      return () => {
+        // componentWillUnmount
+        console.log('这里基本等价于 componentWillUnmount');
+      }
+    }, [deps])
+  ```
+  之所以说是基本等价于，是因为：
+
+  1、useEffect这个Hook接受的callback只有在依赖项变化的时候才会执行，而传统的componentDidUpdate一定会执行，我们需要手动判断状态变化，再执行逻辑
+
+  2、callback 返回的函数（一般用于清理工作）在下一次依赖项发生变化以及组件销毁之前执行，而传统的 componentWillUnmount 只在组件销毁时才会执行。
+
+  ```javascript
+  import React, { useEffect } from 'react';
+  import comments from './comments';
+
+  function BlogView({ id }) {
+    const handleCommentsChange = useCallback(() => {
+      // 处理评论变化的通知
+    }, []);
+    useEffect(() => {
+      // 获取博客内容
+      fetchBlog(id);
+      // 监听指定 id 的博客文章的评论变化通知
+      const listener = comments.addListener(id, handleCommentsChange);
+      
+      return () => {
+        // 当 id 发生变化时，移除之前的监听
+        comments.removeListener(listener);
+      };
+    }, [id, handleCommentsChange])
+  }
+  ```
+
+  ## 其他生命周期
+  但是 Class 组件中还有其它一些比较少用的方法，比如 getSnapshotBeforeUpdate, componentDidCatch, getDerivedStateFromError。比较遗憾的是目前 Hooks 还没法实现这些功能。因此如果必须用到，你的组件仍然需要用类组件去实现。
+
+
+  # Hooks典型的使用场景
+  ## 如何创建自定义Hooks？
+  
