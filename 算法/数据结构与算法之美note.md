@@ -173,3 +173,44 @@ public void delete(int data) {
 - 4、散列表的构造比二叉查找树复杂，要考虑的东西也很多，而二叉树只需要考虑平衡性这一个问题
 
 递归树，分析时间算法的复杂度
+
+图：
+
+广度优先遍历算法：
+搜索一条从s到t的路径，这样广度遍历的话，搜索到的这条路径实际上是最短路径
+``` javascript
+
+public void bfs(int s, int t) {
+  if (s == t) return;
+  boolean[] visited = new boolean[v];
+  visited[s]=true;
+  Queue<Integer> queue = new LinkedList<>();
+  queue.add(s);
+  int[] prev = new int[v];
+  for (int i = 0; i < v; ++i) {
+    prev[i] = -1;
+  }
+  while (queue.size() != 0) {
+    int w = queue.poll();
+   for (int i = 0; i < adj[w].size(); ++i) {
+      int q = adj[w].get(i);
+      if (!visited[q]) {
+        prev[q] = w;
+        if (q == t) {
+          print(prev, s, t);
+          return;
+        }
+        visited[q] = true;
+        queue.add(q);
+      }
+    }
+  }
+}
+
+private void print(int[] prev, int s, int t) { // 递归打印s->t的路径
+  if (prev[t] != -1 && t != s) {
+    print(prev, s, prev[t]);
+  }
+  System.out.print(t + " ");
+}
+```
