@@ -176,7 +176,30 @@ public void delete(int data) {
 
 图：
 
+无线图结构：
+``` javascript
+
+public class Graph { // 无向图
+  private int v; // 顶点的个数
+  private LinkedList<Integer> adj[]; // 邻接表
+
+  public Graph(int v) {
+    this.v = v;
+    adj = new LinkedList[v];
+    for (int i=0; i<v; ++i) {
+      adj[i] = new LinkedList<>();
+    }
+  }
+
+  public void addEdge(int s, int t) { // 无向图一条边存两次
+    adj[s].add(t);
+    adj[t].add(s);
+  }
+}
+```
+
 广度优先遍历算法：
+光谷优先这种思想其实是借助栈来实现的
 搜索一条从s到t的路径，这样广度遍历的话，搜索到的这条路径实际上是最短路径
 ``` javascript
 
@@ -212,5 +235,85 @@ private void print(int[] prev, int s, int t) { // 递归打印s->t的路径
     print(prev, s, prev[t]);
   }
   System.out.print(t + " ");
+}
+```
+
+深度优先遍历：
+``` javascript
+
+boolean found = false; // 全局变量或者类成员变量
+
+public void dfs(int s, int t) {
+  found = false;
+  boolean[] visited = new boolean[v];
+  int[] prev = new int[v];
+  for (int i = 0; i < v; ++i) {
+    prev[i] = -1;
+  }
+  recurDfs(s, t, visited, prev);
+  print(prev, s, t);
+}
+
+private void recurDfs(int w, int t, boolean[] visited, int[] prev) {
+  if (found == true) return;
+  visited[w] = true;
+  if (w == t) {
+    found = true;
+    return;
+  }
+  for (int i = 0; i < adj[w].size(); ++i) {
+    int q = adj[w].get(i);
+    if (!visited[q]) {
+      prev[q] = w;
+      recurDfs(q, t, visited, prev);
+    }
+  }
+}
+```
+
+Trie树
+也叫字典树，是一种专门处理字符串匹配的数据结构，用来解决在一组字符串集合中快速查找某个字符串的问题
+代码实现：
+``` javascript
+
+public class Trie {
+  private TrieNode root = new TrieNode('/'); // 存储无意义字符
+
+  // 往Trie树中插入一个字符串
+  public void insert(char[] text) {
+    TrieNode p = root;
+    for (int i = 0; i < text.length; ++i) {
+      int index = text[i] - 'a';
+      if (p.children[index] == null) {
+        TrieNode newNode = new TrieNode(text[i]);
+        p.children[index] = newNode;
+      }
+      p = p.children[index];
+    }
+    p.isEndingChar = true;
+  }
+
+  // 在Trie树中查找一个字符串
+  public boolean find(char[] pattern) {
+    TrieNode p = root;
+    for (int i = 0; i < pattern.length; ++i) {
+      int index = pattern[i] - 'a';
+      if (p.children[index] == null) {
+        return false; // 不存在pattern
+      }
+      p = p.children[index];
+    }
+    if (p.isEndingChar == false) return false; // 不能完全匹配，只是前缀
+    else return true; // 找到pattern
+  }
+
+  public class TrieNode {
+    public char data;
+    public TrieNode[] children = new TrieNode[26];
+    public boolean isEndingChar = false;
+    public TrieNode(char data) {
+      this.data = data;
+    }
+  }
 }
 ```
