@@ -90,3 +90,31 @@ let b1 = debounce(b)
 let c1 = debounce(c)
 
 // 函数本身 + debounce执行期上下文
+
+
+console.log(1);
+new Promise((resolve) => {
+  resolve(2)
+}).then(res => {
+  console.log(res)
+}).then(res => {
+  console.log('ec', res)
+  console.log('3')
+})
+
+new Promise(resolve => {
+  resolve(4)
+}).then(res => console.log(res))
+
+console.log(6)
+
+const createPromise = (id) => 
+	new Promise(resolve=>
+		setTimeout(()=>{
+			console.log("promise->"+id+":"+new Date());
+			resolve(id);
+		},1000))
+var tasks = [createPromise(1),createPromise(2),createPromise(3)];
+console.log(tasks);
+var doTask = tasks.reduce((prev,next)=>prev.then((res) => next()),Promise.resolve());
+doTask.then(()=>console.log("all done."));
